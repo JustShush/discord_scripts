@@ -1,4 +1,3 @@
-from pynput.mouse import Button, Controller
 from pynput.keyboard import Key, Controller
 import time
 import keyboard
@@ -8,35 +7,25 @@ import keyboard
 #        print("You pressed 'a'.")
 #        break
 
-# create a mouse/kb controller object
-mouse = Controller()
+# create a kb controller object
 kb = Controller()
 
-op = input("mouse(1) or keyboard(2)?: ")
-if op == 1:
-	flag = True
-else:
-	flag = False
+cooldown = 14
+alt_tab = False
 
-max = int(input("quantas vezes: "))
-print(f"deve demorar por volta de: {(max * 10) + (max * 4)}s\n{((max * 10) + (max * 4)) / 60} min")
+print("If you dont want cooldown write 0.  (The default cooldown is 10 sec)")
+Input = input("Cooldown: ")
+if Input == "":
+	cooldown = 14
+	print(f"Cooldown set to default: {cooldown}")
+else: 
+	cooldown = int(Input)
+top = int(input("how many times: "))
+print(f"it should take around: {(top * 10) + (top * 4)}s\n{((top * 10) + (top * 4)) / 60} min")
 
 i = 0
 time.sleep(2) # 2 sec sleep
-while i < max:
-		if flag == True:
-
-			# open stikers (1080, 680)
-			mouse.position = (1080, 680)
-			mouse.click(Button.left)
-			time.sleep(2) # 2 sec sleep
-
-			# click the stiker (776, 364)
-			mouse.position = (776, 364)
-			mouse.click(Button.left)
-			time.sleep(14) # 14 sec sleep
-			i += 1
-		else:
+while i < top:
 			kb.press(kb._Key.ctrl_l)
 			kb.press('s')
 			kb.release(kb._Key.ctrl_l)
@@ -44,7 +33,7 @@ while i < max:
 			time.sleep(2) # 2 sec sleep
 			kb.press(kb._Key.enter)
 			kb.release(kb._Key.enter)
-			print(f"{(max - 1) - i} stickers left")
-			time.sleep(14) # 14 sec sleep
+			print(f"{(top - 1) - i} stickers left")
+			time.sleep(cooldown) # 14 sec sleep
 			i += 1
 
