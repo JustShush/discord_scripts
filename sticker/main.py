@@ -44,6 +44,7 @@ while i < max:
 			time.sleep(2) # 2 sec sleep
 			kb.press(kb._Key.enter)
 			kb.release(kb._Key.enter)
+			print(f"{(max - 1) - i} stickers left")
 			time.sleep(14) # 14 sec sleep
 			i += 1
 
